@@ -1,1 +1,46 @@
-# KG-CTF
+# Accurate Coupled Tensor Factorization with Knowledge Graph
+
+This is the code repository for Accurate Coupled Tensor Factorization with Knowledge Graph.
+This includes the implementation of DoReMe (**K**nowledge **G**raph based **C**oupled **T**ensor **F**actorization)
+our novel approach for coupled tensor factorization.
+
+## Abstract
+How can we accurately decompose a temporal irregular tensor along with a related knowledge graph tensor?
+The PARAFAC2 decomposition is widely used for analyzing irregular tensors composed of matrices with varying row sizes.
+Recent advancements in PARAFAC2 methods primarily focus on capturing dynamic features that change over time, since data irregularities often arise from temporal fluctuations.
+However, these methods often neglect static features, such as knowledge information, which remain constant over time.
+In this paper, we propose KG-CTF (Knowledge Graph-based Coupled Tensor Factorization), a coupled tensor factorization method designed to capture both dynamic and static features within an irregular tensor.
+To incorporate knowledge graph tensors as static features, KG-CTF couples an irregular temporal tensor with a knowledge graph tensor that share a common axis.
+Additionally, KG-CTF employs a relational regularization to capture relationships among the factor matrices of the knowledge graph tensor.
+For accelerated convergence of the factor matrices, KG-CTF utilizes momentum update techniques.
+Extensive experiments show that KG-CTF reduces error rates by up to 2.19× compared to existing PARAFAC2 methods.
+
+## Requirements
+
+We recommend using the following versions of packages:
+ - numpy==1.24.4
+ - tqdm==4.66.5
+ - pandas==2.0.3
+ - scikit-learn==1.3.2
+ - scipy==1.10.1
+
+## Data Overview
+We use two datasets.
+Download the datasets from the official links.
+
+|        **Dataset**        |                  **Link**                   | 
+|:-------------------------:|:-------------------------------------------:| 
+|       **SP500**        |           `https://www.kaggle.com/datasets/camnugent/sandp500`           | 
+|       **NASDAQ**        |           `https://www.kaggle.com/datasets/paultimothymooney/stock-market-data`           | 
+|       **NYSE**        |           `https://www.kaggle.com/datasets/paultimothymooney/stock-market-data`           | 
+|       **CHINA-STOCK**        |           `https://pypi.org/project/yfinance/`           | 
+|       **KOREA-STOCK**        |           `https://pypi.org/project/yfinance/`           | 
+|       **JAPAN-STOCK**        |           `https://pypi.org/project/yfinance/`           | 
+
+## How to Run
+You can run the demo script in the directory by the following code.
+```
+python main.py
+```
+
+## Reference
