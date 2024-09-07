@@ -1,8 +1,7 @@
 # Accurate Coupled Tensor Factorization with Knowledge Graph
 
-This is the code repository for Accurate Coupled Tensor Factorization with Knowledge Graph.
-This includes the implementation of DoReMe (**K**nowledge **G**raph based **C**oupled **T**ensor **F**actorization)
-our novel approach for coupled tensor factorization.
+This is the code repository for "Accurate Coupled Tensor Factorization with Knowledge Graph", submitted to BigData 2024.
+This includes the implementation of KGCTF (**K**nowledge **G**raph based **C**oupled **T**ensor **F**actorization) our novel approach for coupled tensor factorization.
 
 ## Abstract
 How can we accurately decompose a temporal irregular tensor along with a related knowledge graph tensor?
