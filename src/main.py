@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from kgctf import StockTensorManager, KGTensorManager, FactorManager
+from KGCTF import StockTensorManager, KGTensorManager, FactorManager
 
 # Load data
 trn_file = '/KG-CTF/data/stock_train.csv'
