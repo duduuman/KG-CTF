@@ -3,11 +3,11 @@ import pandas as pd
 from kgctf import StockTensorManager, KGTensorManager, FactorManager
 
 # Load data
-trn_file = '/home/duduuman/KG-CTF/data/stock_train.csv'
-true_file = '/home/duduuman/KG-CTF/data/stock_true.csv'
-missing_idxs = np.load('/home/duduuman/KG-CTF/data/missing_idxs.npy', allow_pickle=True).item()
-aux_file = '/home/duduuman/KG-CTF/data/updated_relations.txt'
-common_symbols_file = '/home/duduuman/KG-CTF/data/common_symbols2id.txt'
+trn_file = '/KG-CTF/data/stock_train.csv'
+true_file = '/KG-CTF/data/stock_true.csv'
+missing_idxs = np.load('/KG-CTF/data/missing_idxs.npy', allow_pickle=True).item()
+aux_file = '/KG-CTF/data/updated_relations.txt'
+common_symbols_file = '/KG-CTF/data/common_symbols2id.txt'
 
 stock_train = pd.read_csv(trn_file, dtype={'ID': str})
 stock_true = pd.read_csv(true_file, dtype={'ID': str})
@@ -76,7 +76,7 @@ def evaluate_rmse(stock_true, predicted_tensors, missing_idxs):
     return rmse
 
 # Set parameters for ALS update
-num_epochs = 10
+num_epochs = 20
 lambdas = (10, 0.01, 1)
 
 # Training loop
