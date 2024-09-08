@@ -42,4 +42,3 @@ You can run the demo script in the directory by the following code.
 python main.py
 ```
 
-## Reference
