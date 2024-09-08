@@ -12,7 +12,7 @@ In this paper, we propose KG-CTF (Knowledge Graph-based Coupled Tensor Factoriza
 To incorporate knowledge graph tensors as static features, KG-CTF couples an irregular temporal tensor with a knowledge graph tensor that share a common axis.
 Additionally, KG-CTF employs a relational regularization to capture relationships among the factor matrices of the knowledge graph tensor.
 For accelerated convergence of the factor matrices, KG-CTF utilizes momentum update techniques.
-Extensive experiments show that KG-CTF reduces error rates by up to 2.19× compared to existing PARAFAC2 methods.
+Extensive experiments show that KG-CTF reduces error rates by up to 1.64× compared to existing PARAFAC2 methods.
 
 ## Requirements
 
