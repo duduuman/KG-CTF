@@ -202,50 +202,47 @@ class FactorManager:
 
         # Step 1: Update U_k, S_k for each stock tensor
         for idx, symbol in enumerate(self.stock_tensors.keys()):
-            try:
-                T_k = self.stock_tensors[symbol]
-                V = self.factors_stock[2]
-                Q_k = self.factors_stock[3][idx]
-                H = self.factors_stock[4]
+            T_k = self.stock_tensors[symbol]
+            V = self.factors_stock[2]
+            Q_k = self.factors_stock[3][idx]
+            H = self.factors_stock[4]
 
-                symbol_id = self.symbol_to_id[symbol]  # Assuming symbol ID is the key in tensors
-                G_k = self.kg_tensors.get(symbol_id)
+            symbol_id = self.symbol_to_id[symbol]  # Assuming symbol ID is the key in tensors
+            G_k = self.kg_tensors.get(symbol_id)
 
-                # Update U_k
-                S_k = self.factors_stock[1][idx]
-                U_k_old = self.factors_stock[0][idx]
-                U_k = self.update_U_k(T_k, V, S_k, Q_k, H, lambda_u, U_k_old, beta_k)
-                self.factors_stock[0][idx] = U_k
-                U_dict[idx] = U_k
+            # Update U_k
+            S_k = self.factors_stock[1][idx]
+            U_k_old = self.factors_stock[0][idx]
+            U_k = self.update_U_k(T_k, V, S_k, Q_k, H, lambda_u, U_k_old, beta_k)
+            self.factors_stock[0][idx] = U_k
+            U_dict[idx] = U_k
 
-                # Update S_k
-                S_k_old = S_k
-                if symbol_id in self.kg_tensors:
-                    M_k = self.factors_kg[0][idx]
-                    R = self.factors_kg[2]
-                    D_k = self.factors_kg[4][idx]
-                    # print(f"U_k.T shape: {U_k.T.shape}")
-                    # print(f"T_k shape: {T_k.shape}")
-                    # print(f"V shape: {V.shape}")
-                    # print(f"M_k.T shape: {M_k.T.shape}")
-                    # print(f"G_k shape: {G_k.shape}")
-                    # print(f"R shape: {R.shape}")
-                    S_k = self.update_S_k(T_k, U_k, V, G_k, M_k, R, D_k, lambda_l, lambda_r, S_k_old, beta_k)
-                    self.factors_stock[1][idx] = S_k
+            # Update S_k
+            S_k_old = S_k
+            if symbol_id in self.kg_tensors:
+                M_k = self.factors_kg[0][idx]
+                R = self.factors_kg[2]
+                D_k = self.factors_kg[4][idx]
+                # print(f"U_k.T shape: {U_k.T.shape}")
+                # print(f"T_k shape: {T_k.shape}")
+                # print(f"V shape: {V.shape}")
+                # print(f"M_k.T shape: {M_k.T.shape}")
+                # print(f"G_k shape: {G_k.shape}")
+                # print(f"R shape: {R.shape}")
+                S_k = self.update_S_k(T_k, U_k, V, G_k, M_k, R, D_k, lambda_l, lambda_r, S_k_old, beta_k)
+                self.factors_stock[1][idx] = S_k
 
-                # Update M_k
-                if symbol_id in self.kg_tensors:
-                    M_k_old = M_k
-                    M_k = self.update_M_k(G_k, M_k, S_k, R, D_k, lambda_r, lambda_l, M_k_old, beta_k)
-                    self.factors_kg[0][idx] = M_k
-                    
-                    unique_entities = sorted(set(self.kg_data[self.kg_data['tail'] == symbol_id]['head'].unique()))
-                    entity_idx = {entity: idx for idx, entity in enumerate(unique_entities)}
-                    for entity, i in entity_idx.items():
-                        self.entity_embeddings[entity] = M_k[i]
-            except Exception as e:
-                print(f"Error processing symbol {symbol}. Skipping. Error: {e}")
-                continue
+            # Update M_k
+            if symbol_id in self.kg_tensors:
+                M_k_old = M_k
+                M_k = self.update_M_k(G_k, M_k, S_k, R, D_k, lambda_r, lambda_l, M_k_old, beta_k)
+                self.factors_kg[0][idx] = M_k
+                
+                unique_entities = sorted(set(self.kg_data[self.kg_data['tail'] == symbol_id]['head'].unique()))
+                entity_idx = {entity: idx for idx, entity in enumerate(unique_entities)}
+                for entity, i in entity_idx.items():
+                    self.entity_embeddings[entity] = M_k[i]
+
         # Step 2: Update V
         V_old = self.factors_stock[2]
         self.factors_stock[2] = self.update_V(self.stock_tensors, self.factors_stock, lambda_l, V_old, beta_k)
