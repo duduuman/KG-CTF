@@ -6,7 +6,7 @@ from kgctf import StockTensorManager, KGTensorManager, FactorManager
 trn_file = '/KG-CTF/data/stock_train.csv'
 true_file = '/KG-CTF/data/stock_true.csv'
 missing_idxs = np.load('/KG-CTF/data/missing_idxs.npy', allow_pickle=True).item()
-aux_file = '/KG-CTF/data/updated_relations.txt'
+aux_file = '/KG-CTF/data/relations.txt'
 common_symbols_file = '/KG-CTF/data/common_symbols2id.txt'
 
 stock_train = pd.read_csv(trn_file, dtype={'ID': str})
