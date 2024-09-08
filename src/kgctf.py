@@ -41,8 +41,6 @@ class KGTensorManager:
         self.common_symbols = common_symbols
         self.kg_tensors = None
         self.rank = rank
-
-        # 엔티티 임베딩 초기화
         self.entity_embeddings = {entity: np.random.rand(self.rank) for entity in kg_data['head'].unique()}
 
 
@@ -56,7 +54,7 @@ class KGTensorManager:
             head = row['head']
             relation = row['relation']
             tensor[entity_idx[head], relation_idx[relation]] = 1
-        # 초기화된 엔티티 임베딩을 가져옴
+
         M_k = np.array([self.entity_embeddings[entity] for entity in unique_entities])  # Example of entity embedding matrix
         
         return symbol_id, tensor, M_k
@@ -77,27 +75,23 @@ class KGTensorManager:
 # FactorManager to manage ALS updates and factor initialization
 class FactorManager:
     def __init__(self, stock_tensors, kg_tensors, entity_embeddings, common_symbols, kg_data, rank):
-        # symbol_to_id와 id_to_symbol 딕셔너리 생성
         self.common_symbols = common_symbols
         self.kg_data = kg_data 
 
         self.symbol_to_id = dict(zip(self.common_symbols['symbol'], self.common_symbols['id']))
         self.id_to_symbol = {v: k for k, v in self.symbol_to_id.items()}
 
-        # OrderedDict를 사용하여 stock_tensors와 kg_tensors 정렬
         ordered_stock_tensors = OrderedDict()
         ordered_kg_tensors = OrderedDict()
 
         for symbol in stock_tensors.keys():
-            symbol_id = self.symbol_to_id[symbol]  # 심볼을 ID로 매핑
-            #if symbol_id in kg_tensors:  # kg_tensors에 해당 ID가 있는지 확인
+            symbol_id = self.symbol_to_id[symbol]  
+            #if symbol_id in kg_tensors:  
             ordered_stock_tensors[symbol] = stock_tensors[symbol]
             ordered_kg_tensors[symbol_id] = kg_tensors[symbol_id]
 
         self.stock_tensors = ordered_stock_tensors
         self.kg_tensors = ordered_kg_tensors
-
-        # KGTensorManager에서 받은 entity_embeddings 사용
         self.entity_embeddings = entity_embeddings
 
         self.rank = rank
@@ -244,8 +238,7 @@ class FactorManager:
                     M_k_old = M_k
                     M_k = self.update_M_k(G_k, M_k, S_k, R, D_k, lambda_r, lambda_l, M_k_old, beta_k)
                     self.factors_kg[0][idx] = M_k
-
-                    # 엔티티 임베딩 업데이트
+                    
                     unique_entities = sorted(set(self.kg_data[self.kg_data['tail'] == symbol_id]['head'].unique()))
                     entity_idx = {entity: idx for idx, entity in enumerate(unique_entities)}
                     for entity, i in entity_idx.items():
