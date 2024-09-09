@@ -170,11 +170,11 @@ def initialize_factors(num_companies, rank, stock_tensor_shapes, kg_tensor_shape
 
 def initialize_data():
 
-    trn_file = '/home/hyoung/project/KG-CTF/data/stock_train.csv'
-    true_file = '/home/hyoung/project/KG-CTF/data/stock_true.csv'
-    missing_idxs = np.load('/home/hyoung/project/KG-CTF/data/missing_idxs.npy', allow_pickle=True).item()
-    aux_file = '/home/hyoung/project/KG-CTF/data/updated_relations.txt'
-    common_symbols_file = '/home/hyoung/project/KG-CTF/data/common_symbols2id.txt'
+    trn_file = '/data/stock_train.csv'
+    true_file = '/data/stock_true.csv'
+    missing_idxs = np.load('/data/missing_idxs.npy', allow_pickle=True).item()
+    aux_file = '/data/updated_relations.txt'
+    common_symbols_file = '/data/common_symbols2id.txt'
     rank = 10
     
     stock_train = pd.read_csv(trn_file, dtype={'ID': str})
