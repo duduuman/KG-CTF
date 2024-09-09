@@ -36,7 +36,7 @@ Download the datasets from the official links.
 |       **KOREA-STOCK**        |           `https://pypi.org/project/yfinance/`           | 
 |       **JAPAN-STOCK**        |           `https://pypi.org/project/yfinance/`           | 
 
-We also open-source StockKG, a large-scale knowledge graph that includes stock information from four major countries: South Korea, the United States, Japan, and China. For the knowledge graph dataset, we construct triple-form knowledge graphs related to all stocks present in the six stock datasets by utilizing the ICKG model. The StockKG dataset comprises 89,822 entities, including 14,019 stock entities, and 15 relations.
+We also open-source StockKG, a large-scale knowledge graph that includes stock information from four major countries: South Korea, the United States, Japan, and China. For the knowledge graph dataset, we construct triple-form knowledge graphs related to all stocks present in the six stock datasets by utilizing the [ICKG](https://github.com/xiaohui-victor-li/FinDKG) model. The StockKG dataset comprises 89,822 entities, including 14,019 stock entities, and 15 relations.
 
 ## How to Run
 You can run the demo script in the directory by the following code. The datasets for demo are available [[here]](https://drive.google.com/file/d/1-6AksJC0c4mHRoihVc_-hjbcF1M15hYZ/view?usp=drive_link).
